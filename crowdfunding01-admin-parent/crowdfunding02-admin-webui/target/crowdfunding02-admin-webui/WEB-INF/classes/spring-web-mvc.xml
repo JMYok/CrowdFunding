@@ -48,14 +48,15 @@
 
 
     <!--在mvc容器中注册拦截器 ： 在使用SpringSecurity后，就要注释掉原来的自定义的拦截器了-->
-    <!--    <mvc:interceptors>-->
-    <!--        <mvc:interceptor>-->
-    <!--            <mvc:mapping path="/**"/>-->
-    <!--            <mvc:exclude-mapping path="/admin/login/page.html"/>-->
-    <!--            <mvc:exclude-mapping path="/admin/login/logout.html"/>-->
-    <!--            <mvc:exclude-mapping path="/admin/login/doLogin.html"/>-->
-    <!--            <bean class="org.fall.mvc.interceptor.LoginInterceptor"/>-->
-    <!--        </mvc:interceptor>-->
-    <!--    </mvc:interceptors>-->
+        <mvc:interceptors>
+            <mvc:interceptor>
+                <!--/**对应多层路径-->
+                <mvc:mapping path="/**"/>
+                <mvc:exclude-mapping path="/admin/login/page.html"/>
+                <mvc:exclude-mapping path="/admin/login/logout.html"/>
+                <mvc:exclude-mapping path="/admin/login/doLogin.html"/>
+                <bean class="org.bobjiang.mvc.interceptor.LoginInterceptor"/>
+            </mvc:interceptor>
+        </mvc:interceptors>
 
 </beans>
