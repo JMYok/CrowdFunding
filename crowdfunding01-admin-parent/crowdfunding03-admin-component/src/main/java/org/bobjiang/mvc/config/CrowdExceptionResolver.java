@@ -1,6 +1,7 @@
 package org.bobjiang.mvc.config;
 
 import com.bobjiang.crowd.constant.CrowdConstant;
+import com.bobjiang.crowd.exception.LoginFailedException;
 import com.bobjiang.crowd.util.CrowdUtil;
 import com.bobjiang.crowd.util.ResultEntity;
 import com.google.gson.Gson;
@@ -16,15 +17,18 @@ import java.io.IOException;
  * @author BobJiang
  * @version 1.0
  * @date 2021-01-22 16:01
+ * 当前类是一个基于注解的异常处理类（实测，注解版异常处理比xml版本优先生效）
  */
-@ControllerAdvice //表示当前类是一个基于注解的异常处理类（实测，注解版异常处理比xml版本优先生效）
+@ControllerAdvice
 public class CrowdExceptionResolver {
     // 处理其他异常
-    @ExceptionHandler(value = {Exception.class})
-    public ModelAndView resolveException(Exception exception,
+    @ExceptionHandler(value = {LoginFailedException.class})
+    public ModelAndView resolveException(LoginFailedException exception,
                                          HttpServletRequest request, HttpServletResponse response
     ) throws IOException {
-        return commonCode(exception,request,response,"system-error");
+        String viewName = "admin-login";
+
+        return commonCode(exception,request,response,viewName);
     }
 
 

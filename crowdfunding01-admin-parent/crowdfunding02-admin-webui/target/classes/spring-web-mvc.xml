@@ -37,8 +37,8 @@
     <!--通过view-controller 来设置一些直接的页面跳转-->
     <!--去登录页面-->
     <mvc:view-controller path="/admin/login/page.html" view-name="admin-login"/>
-    <!--&lt;!&ndash;去登录成功的主页面&ndash;&gt;-->
-    <!--<mvc:view-controller path="/admin/main/page.html" view-name="admin-main"/>-->
+    <!--去登录成功的主页面-->
+    <mvc:view-controller path="/admin/main/page.html" view-name="admin-main"/>
     <!--&lt;!&ndash;前往注册admin页面&ndash;&gt;-->
     <!--<mvc:view-controller path="/admin/page/save.html" view-name="admin-add"/>-->
     <!--&lt;!&ndash; 前往角色维护页面 &ndash;&gt;-->

@@ -18,7 +18,7 @@
       <module name="crowdfunding02adminwebui" target="1.7" />
       <module name="crowdfunding03admincomponent" target="1.5" />
       <module name="crowdfunding04adminentity" target="1.5" />
-      <module name="crowdfunding05-common-util" target="1.5" />
+      <module name="crowdfunding05-common-util" target="7" />
       <module name="crowdfunding06-common-reverse" target="1.5" />
     </bytecodeTargetLevel>
   </component>
