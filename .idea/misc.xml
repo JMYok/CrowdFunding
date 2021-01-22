@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/crowdfunding01-admin-parent/crowdfunding02-admin-webui" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/crowdfunding01adminparent/pom.xml" />
+        <option value="$PROJECT_DIR$/crowdfunding01-adminparent/pom.xml" />
+        <option value="$PROJECT_DIR$/crowdfunding01-admin-parent/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/crowdfunding01adminparent/crowdfunding02-admin-webui/pom.xml" />
+        <option value="$PROJECT_DIR$/crowdfunding01adminparent/crowdfunding03-admin-component/pom.xml" />
+        <option value="$PROJECT_DIR$/crowdfunding01adminparent/crowdfunding05-common-util/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectResources">
+    <resource url="http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" location="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectRootManager">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
