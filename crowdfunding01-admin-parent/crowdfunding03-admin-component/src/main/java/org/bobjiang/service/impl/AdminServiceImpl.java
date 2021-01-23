@@ -3,6 +3,8 @@ package org.bobjiang.service.impl;
 import com.bobjiang.crowd.constant.CrowdConstant;
 import com.bobjiang.crowd.exception.LoginFailedException;
 import com.bobjiang.crowd.util.CrowdUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.bobjiang.entity.Admin;
 import org.bobjiang.entity.AdminExample;
 import org.bobjiang.mapper.AdminMapper;
@@ -78,5 +80,17 @@ public class AdminServiceImpl implements AdminService {
         }
         // 7.若一致则返回对象
         return admin;
+    }
+
+    public PageInfo<Admin> getPageInfo(String keyword, Integer pageNum, Integer pageSize) {
+        // 1.调用PageHelper的静态方法开启分页功能
+        //重复体现了PageHelper“非侵入式”的设计，不需要更改原本的代码
+        PageHelper.startPage(pageNum,pageSize);
+
+        // 2.根据keyword搜索数据
+        List<Admin> adminList = adminMapper.selectAdminByKeyWord(keyword);
+
+        // 3.封装到PageInfo对象中
+        return new PageInfo<Admin>(adminList);
     }
 }

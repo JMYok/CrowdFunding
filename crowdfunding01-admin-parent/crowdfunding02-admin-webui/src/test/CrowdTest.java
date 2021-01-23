@@ -31,6 +31,20 @@ public class CrowdTest {
     @Autowired
     private AdminService adminService;
 
+    /**
+     * 生成后台用户数据
+     */
+    @Test
+    public void generateData(){
+        for (int i=0;i<238;i++){
+            Admin admin = new Admin(null,"testAcct"+i,"测试数据"+i,"11","test@test.com",null);
+            adminService.saveAdmin(admin);
+        }
+    }
+
+    /**
+     * 测试Admin插入
+     */
     @Test
     public void testAdminInsert(){
         Admin admin = new Admin(null,"tom","汤姆","123456","tom@126.com",null);
@@ -42,12 +56,19 @@ public class CrowdTest {
         System.out.println("受影响行数:"+count);
     }
 
+    /**
+     * 测试数据库连接
+     * @throws SQLException
+     */
     @Test
     public void testConnection() throws SQLException{
         Connection connection = dataSource.getConnection();
         System.out.println(connection);
     }
-    //打印自定义的日志
+
+    /**
+     * 打印自定义的日志
+     */
     @Test
     public void testLogger(){
         //获取Logger对象，这里传入的Class就是当前打印日志的类
@@ -70,6 +91,9 @@ public class CrowdTest {
         logger.error("I am ERROR!!!");
     }
 
+    /**
+     * 测试事务
+     */
     @Test
     public void testTx(){
         Admin admin = new Admin(null,"bob","鲍勃","123456","22@126.com",null);
