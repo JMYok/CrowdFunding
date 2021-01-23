@@ -7,6 +7,7 @@ import org.bobjiang.service.api.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -81,5 +82,20 @@ public class AdminHandler {
         modelMap.addAttribute(CrowdConstant.NAME_PAGE_INFO,pageInfo);
         //进入对应的显示管理员信息的页面（/WEB-INF/admin-page.jsp）
         return "admin-page";
+    }
+
+    @RequestMapping("/admin/page/remove/{adminId}/{pageNum}/{keyword}.html")
+    public String removeAdmin(
+            // 从前端获取的管理员id
+            @PathVariable("adminId") Integer adminId,
+            // 从前端获取的当前页码与关键字（为了删除后跳转的页面仍然是刚才的页面，优化体验）
+            @PathVariable("pageNum") Integer pageNum,
+            @PathVariable("keyword") String keyword){
+
+        // 调用service层方法，从数据库根据id删除管理员
+        adminService.removeById(adminId);
+
+        //重定向（减少数据库操作）返回信息页
+        return "redirect:/admin/page/page.html?pageNum="+pageNum+"&keyword="+keyword;
     }
 }

@@ -11,10 +11,24 @@ import java.util.List;
  * @date 2021-01-20 17:21
  */
 public interface AdminService {
+    /**
+     * 保存Admin信息
+     * @param admin
+     */
     void saveAdmin(Admin admin);
 
+    /**
+     * 得到所有Admin信息
+     * @return List<Admin>
+     */
     List<Admin> getAll();
 
+    /**
+     * 根据用户名称返回Admin信息
+     * @param adminLoginAcct
+     * @param password
+     * @return
+     */
     Admin getAdminByUsername(String adminLoginAcct,String password);
 
     /**
@@ -25,4 +39,18 @@ public interface AdminService {
      * @return PageInfo<Admin>
      */
     PageInfo<Admin> getPageInfo(String keyword,Integer pageNum,Integer pageSize);
+
+    /**
+     * 根据Id删除admin信息
+     * @param adminId
+     */
+    void removeById(Integer adminId);
+
+
+//    void updateAdmin(Admin admin);
+//
+//    void saveAdminRoleRelationship(Integer adminId, List<Integer> roleList);
+//
+//    Admin getAdminByLoginAcct(String loginAcct);
+
 }
