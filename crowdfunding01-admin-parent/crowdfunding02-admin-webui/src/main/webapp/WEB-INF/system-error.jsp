@@ -16,9 +16,13 @@
     <script src="jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(function () {
-            $("button").click(function () {
+            $("button#btn1").click(function () {
                 window.history.back();
             });
+            
+            $("button#login").click(function () {
+                //（待完善）返回登录页
+            })
         });
     </script>
 </head>
@@ -35,7 +39,8 @@
     <h1 style="text-align: center;">请求出现了错误QAQ</h1>
     <h2 style="text-align: center;">错误消息：${requestScope.exception.message}</h2>
     <br/><br/>
-    <button style="width:150px;margin: 0 auto;" class="btn btn-lg btn-success btn-block">返回上一步</button>
+    <button style="width:150px;margin: 0 auto;" id="btn1" class="btn btn-lg btn-success btn-block">返回上一步</button>
+    <button style="width:150px;margin: 0 auto;" id="back_login" class="btn btn-lg btn-success btn-block">返回登录页</button>
 </div>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>

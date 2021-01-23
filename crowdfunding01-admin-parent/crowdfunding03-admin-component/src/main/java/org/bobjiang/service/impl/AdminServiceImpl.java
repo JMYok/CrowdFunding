@@ -1,6 +1,8 @@
 package org.bobjiang.service.impl;
 
 import com.bobjiang.crowd.constant.CrowdConstant;
+import com.bobjiang.crowd.exception.LoginAcctAlreadyInUseException;
+import com.bobjiang.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.bobjiang.crowd.exception.LoginFailedException;
 import com.bobjiang.crowd.util.CrowdUtil;
 import com.github.pagehelper.PageHelper;
@@ -12,8 +14,11 @@ import org.bobjiang.service.api.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,9 +34,28 @@ public class AdminServiceImpl implements AdminService {
     private AdminMapper adminMapper;
 
     public void saveAdmin(Admin admin) {
-        int count = adminMapper.insert(admin);
-        Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
-        logger.info("受影响行数为："+count);
+        String ori_password = admin.getUserPswd();
+        String MD5_password = CrowdUtil.md5(ori_password);
+        admin.setUserPswd(MD5_password);
+
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+        String createTime = format.format(date);
+        admin.setCreateTime(createTime);
+
+
+        try {
+            int count = adminMapper.insert(admin);
+            Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
+            logger.info("受影响行数为："+count);
+        }catch (Exception e){
+            e.printStackTrace();
+
+            if(e instanceof DuplicateKeyException){
+                throw new LoginAcctAlreadyInUseException(CrowdConstant.MESSAGE_SYSTEM_ERROR_LOGIN_NOT_UNIQUE);
+            }
+        }
+
     }
 
     public List<Admin> getAll() {
@@ -96,5 +120,22 @@ public class AdminServiceImpl implements AdminService {
 
     public void removeById(Integer adminId) {
         adminMapper.deleteByPrimaryKey(adminId);
+    }
+
+    public Admin queryAdmin(Integer id) {
+        return adminMapper.selectByPrimaryKey(id);
+    }
+
+    public void updateAdmin(Admin admin) {
+        // 利用try-catch块，处理更新管理员信息后的loginAcct已在数据库中存在的情况
+        try {
+            adminMapper.updateByPrimaryKeySelective(admin);
+        } catch (Exception e){
+            e.printStackTrace();
+            if (e instanceof DuplicateKeyException){
+                // 当触发该异常时，抛出另一个针对更新时loginAcct已存在的异常
+                throw new LoginAcctAlreadyInUseForUpdateException(CrowdConstant.MESSAGE_SYSTEM_ERROR_LOGIN_NOT_UNIQUE);
+            }
+        }
     }
 }

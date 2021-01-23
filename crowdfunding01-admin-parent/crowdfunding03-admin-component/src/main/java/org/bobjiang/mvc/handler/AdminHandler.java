@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import org.bobjiang.entity.Admin;
 import org.bobjiang.service.api.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,7 +66,7 @@ public class AdminHandler {
      * @param pageNum
      * @param pageSize
      * @param modelMap
-     * @return admin-page
+     * @return page
      */
     @RequestMapping("/admin/page/page.html")
     public String getAdminPage(
@@ -84,6 +85,28 @@ public class AdminHandler {
         return "admin-page";
     }
 
+    /**
+     * 新增admin用户
+     * @param admin
+     * @return
+     */
+    //@PreAuthorize("hasAuthority('user:save')")
+    @RequestMapping("/admin/page/doSave.html")
+    public String addAdmin(Admin admin){
+        // 调用service层存储admin对象的方法
+        adminService.saveAdmin(admin);
+
+        // 重定向会原本的页面，且为了能在添加管理员后看到管理员，设置pageNum为整型的最大值（通过修正到最后一页）
+        return "redirect:/admin/page/page.html?pageNum="+Integer.MAX_VALUE;
+    }
+
+    /**
+     * 删除Admin用户
+     * @param adminId
+     * @param pageNum
+     * @param keyword
+     * @return page
+     */
     @RequestMapping("/admin/page/remove/{adminId}/{pageNum}/{keyword}.html")
     public String removeAdmin(
             // 从前端获取的管理员id
@@ -92,10 +115,54 @@ public class AdminHandler {
             @PathVariable("pageNum") Integer pageNum,
             @PathVariable("keyword") String keyword){
 
+        //（待完善）1.不能删除自身 2.实现逻辑删除
+
         // 调用service层方法，从数据库根据id删除管理员
         adminService.removeById(adminId);
 
         //重定向（减少数据库操作）返回信息页
         return "redirect:/admin/page/page.html?pageNum="+pageNum+"&keyword="+keyword;
     }
+
+
+    /**
+     * 跳转修改页面
+     * @param adminId
+     * @param pageNum
+     * @param keyword
+     * @param modelMap
+     * @return page
+     */
+    @RequestMapping("/admin/page/update/{adminId}/{pageNum}/{keyword}.html")
+    public String toUpdatePage(
+            @PathVariable("adminId") Integer adminId,
+            @PathVariable("pageNum") Integer pageNum,
+            @PathVariable("keyword") String keyword,
+            ModelMap modelMap){
+        // 调用Service方法，通过id查询admin对象
+        Admin admin = adminService.queryAdmin(adminId);
+
+        // 将admin对象、页码、关键字存入modelMap，传到前端页面
+        modelMap.addAttribute("admin", admin);
+        modelMap.addAttribute("pageNum", pageNum);
+        modelMap.addAttribute("keyword", keyword);
+
+        // 跳转到更新页面WEB-INF/admin-update.jsp
+        return "admin-update";
+    }
+
+    /**
+     * 实现修改
+     * @param admin
+     * @param pageNum
+     * @param keyword
+     * @return page
+     */
+    @RequestMapping("/admin/page/doUpdate.html")
+    public String updateAdmin(Admin admin,@RequestParam("pageNum") Integer pageNum,@RequestParam("keyword") String keyword){
+        adminService.updateAdmin(admin);
+        return "redirect:/admin/page/page.html?pageNum="+pageNum + "&keyword="+keyword;
+    }
+
+
 }

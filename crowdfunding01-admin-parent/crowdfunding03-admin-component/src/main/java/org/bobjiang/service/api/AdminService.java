@@ -18,6 +18,13 @@ public interface AdminService {
     void saveAdmin(Admin admin);
 
     /**
+     * 根据id查询Admin
+     * @param id
+     * @return Admin
+     */
+    Admin queryAdmin(Integer id);
+
+    /**
      * 得到所有Admin信息
      * @return List<Admin>
      */
@@ -47,8 +54,8 @@ public interface AdminService {
     void removeById(Integer adminId);
 
 
-//    void updateAdmin(Admin admin);
-//
+    void updateAdmin(Admin admin);
+
 //    void saveAdminRoleRelationship(Integer adminId, List<Integer> roleList);
 //
 //    Admin getAdminByLoginAcct(String loginAcct);

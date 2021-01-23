@@ -1,6 +1,8 @@
 package org.bobjiang.mvc.config;
 
 import com.bobjiang.crowd.constant.CrowdConstant;
+import com.bobjiang.crowd.exception.LoginAcctAlreadyInUseException;
+import com.bobjiang.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.bobjiang.crowd.exception.LoginFailedException;
 import com.bobjiang.crowd.util.CrowdUtil;
 import com.bobjiang.crowd.util.ResultEntity;
@@ -17,11 +19,18 @@ import java.io.IOException;
  * @author BobJiang
  * @version 1.0
  * @date 2021-01-22 16:01
- * 当前类是一个基于注解的异常处理类（实测，注解版异常处理比xml版本优先生效）
+ * 基于注解的异常处理类（实测，注解版异常处理比xml版本优先生效）
  */
 @ControllerAdvice
 public class CrowdExceptionResolver {
-    // 处理其他异常
+    /**
+     * 处理登录异常
+     * @param exception
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
     @ExceptionHandler(value = {LoginFailedException.class})
     public ModelAndView resolveException(LoginFailedException exception,
                                          HttpServletRequest request, HttpServletResponse response
@@ -31,9 +40,50 @@ public class CrowdExceptionResolver {
         return commonCode(exception,request,response,viewName);
     }
 
+    /**
+     * 处理添加账户时账户名重复异常
+     * @param exception
+     * @param request
+     * @param response
+     * @return admin-add page
+     * @throws IOException
+     */
+    @ExceptionHandler(value = {LoginAcctAlreadyInUseException.class})
+    public ModelAndView resolveException(LoginAcctAlreadyInUseException exception,
+                                         HttpServletRequest request, HttpServletResponse response
+    ) throws IOException {
+        String viewName = "admin-add";
+
+        return commonCode(exception,request,response,viewName);
+    }
+
+    /**
+     * 处理更新账户时账户名重复异常
+     * @param exception
+     * @param request
+     * @param response
+     * @return error page
+     * @throws IOException
+     */
+    @ExceptionHandler(value = {LoginAcctAlreadyInUseForUpdateException.class})
+    public ModelAndView resolveException(LoginAcctAlreadyInUseForUpdateException exception,
+                                         HttpServletRequest request, HttpServletResponse response
+    ) throws IOException {
+        String viewName = "system-error";
+
+        return commonCode(exception,request,response,viewName);
+    }
 
 
-    // 整理出的不同异常的可重用代码
+    /**
+     * 不同异常的可重用代码
+     * @param exception
+     * @param request
+     * @param response
+     * @param viewName
+     * @return
+     * @throws IOException
+     */
     private ModelAndView commonCode(
             //触发的异常，此处借助多态
             Exception exception,
