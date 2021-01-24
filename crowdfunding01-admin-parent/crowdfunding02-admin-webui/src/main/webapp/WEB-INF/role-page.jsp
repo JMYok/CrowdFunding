@@ -15,6 +15,7 @@
         window.pageNum = 1;
         window.pageSize = 5;
         window.keyword = "";
+
         // 调用外部的生成分页的函数
         generatePage();
 

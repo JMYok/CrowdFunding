@@ -1,5 +1,7 @@
 import org.bobjiang.entity.Admin;
+import org.bobjiang.entity.Role;
 import org.bobjiang.mapper.AdminMapper;
+import org.bobjiang.mapper.RoleMapper;
 import org.bobjiang.service.api.AdminService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +31,9 @@ public class CrowdTest {
     private AdminMapper adminMapper;
 
     @Autowired
+    private RoleMapper roleMapper;
+
+    @Autowired
     private AdminService adminService;
 
     /**
@@ -39,6 +44,14 @@ public class CrowdTest {
         for (int i=0;i<238;i++){
             Admin admin = new Admin(null,"testAcct"+i,"测试数据"+i,"11","test@test.com",null);
             adminService.saveAdmin(admin);
+        }
+    }
+
+    @Test
+    public void generateRoleData(){
+        for(int i=0;i<238;i++){
+            Role role = new Role(null,"testRole"+i);
+            roleMapper.insert(role);
         }
     }
 
