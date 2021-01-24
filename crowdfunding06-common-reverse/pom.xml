@@ -6,7 +6,7 @@
         <artifactId>crowdfunding01-admin-parent</artifactId>
         <groupId>com.atguigu.crowd</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../crowdfunding01-adminparent/pom.xml</relativePath>
+        <relativePath>../crowdfunding01-admin-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

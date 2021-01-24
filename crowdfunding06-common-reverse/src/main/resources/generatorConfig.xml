@@ -4,7 +4,8 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <context id="atguiguTables" targetRuntime="MyBatis3">
+    <!--mybatis:generator:generate-->
+    <context  id="atguiguTables" targetRuntime="MyBatis3">
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true" />
@@ -62,7 +63,7 @@
         <!--<table tableName="t_order" domainObjectName="OrderPO" />-->
         <!--<table tableName="t_address" domainObjectName="AddressPO" />-->
         <!--<table tableName="t_order_project" domainObjectName="OrderProjectPO" />-->
-            <table tableName="t_admin" domainObjectName="Admin"></table>
+            <table tableName="t_role" domainObjectName="Role"></table>
 
     </context>
 </generatorConfiguration>
