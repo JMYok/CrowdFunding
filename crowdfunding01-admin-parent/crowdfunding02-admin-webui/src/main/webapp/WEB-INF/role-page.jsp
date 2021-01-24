@@ -52,7 +52,6 @@
                         layer.msg("操作成功！");
                         window.pageNum = 999;
                         generatePage();
-
                     }
                     // 返回的result为FAILED
                     if (response.result == "FAILED")
@@ -74,8 +73,8 @@
 
 
         // 给铅笔按钮绑定单击响应函数
-        // 注意，如果这里使用简单的$(".pencilBtn").click();来绑定，会发现只在初始页生效，当进入其他页码时，按钮失效
-        // 因此，这里使用jQuery的on()函数解决上面的问题
+        // 注意，如果这里使用传统的$(".pencilBtn").click();来绑定，因为按钮为动态生成的，所以会发现只在初始页生效，当进入其他页码时，按钮失效
+        // 因此，这里使用jQuery的on()函数解决上面的问题。注意首先选中静态元素。
         // on()函数三个传参：1、事件名 ; 2、真正要绑定的按钮的选择器 ; 3、绑定的函数
         $("#rolePageTBody").on("click",".pencilBtn",function () {
 

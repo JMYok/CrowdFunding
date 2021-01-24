@@ -3,6 +3,7 @@ package org.bobjiang.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.bobjiang.entity.Role;
+import org.bobjiang.entity.RoleExample;
 import org.bobjiang.mapper.RoleMapper;
 import org.bobjiang.service.api.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +38,20 @@ public class RoleServiceImpl implements RoleService {
     }
 
     public void updateRole(Role role) {
-
+        roleMapper.updateByPrimaryKey(role);
     }
 
     public void removeById(List<Integer> roleIdList) {
+        // 创建RoleExample
+        RoleExample roleExample = new RoleExample();
 
+        // 获取Criteria对象
+        RoleExample.Criteria criteria = roleExample.createCriteria();
+
+        // 使用Criteria封装查询条件
+        criteria.andIdIn(roleIdList);
+
+        roleMapper.deleteByExample(roleExample);
     }
 
     public List<Role> queryUnAssignedRoleList(Integer adminId) {
