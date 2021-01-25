@@ -63,7 +63,7 @@
         <!--<table tableName="t_order" domainObjectName="OrderPO" />-->
         <!--<table tableName="t_address" domainObjectName="AddressPO" />-->
         <!--<table tableName="t_order_project" domainObjectName="OrderProjectPO" />-->
-            <table tableName="t_role" domainObjectName="Role"></table>
+            <table tableName="t_menu" domainObjectName="Menu"></table>
 
     </context>
 </generatorConfiguration>
