@@ -30,4 +30,17 @@ public interface AdminMapper {
 
     int updateByPrimaryKey(Admin record);
 
+    /**
+     * 删除admin所有已分配的角色
+     * @param adminId
+     */
+    void clearOldRelationship(Integer adminId);
+
+    /**
+     * 给指定admin分配角色
+     * @param adminId
+     * @param roleIdList
+     */
+    void saveAdminRoleRelationship(@Param("adminId") Integer adminId, @Param("roleIdList") List<Integer> roleIdList);
+
 }

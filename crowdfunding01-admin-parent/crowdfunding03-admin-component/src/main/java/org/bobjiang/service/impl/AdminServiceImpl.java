@@ -138,4 +138,16 @@ public class AdminServiceImpl implements AdminService {
             }
         }
     }
+
+    public void saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList) {
+
+        // 先清除旧的对应inner_admin_role表中对应admin_id的数据
+        adminMapper.clearOldRelationship(adminId);
+
+        // 如果roleIdList非空，则将该list保存到数据库表中，且admin_id=adminId
+        if (roleIdList != null && roleIdList.size() > 0){
+            adminMapper.saveAdminRoleRelationship(adminId,roleIdList);
+        }
+        // roleIdList为空，则清空后不做操作
+    }
 }

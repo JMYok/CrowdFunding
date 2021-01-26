@@ -55,10 +55,10 @@ public class RoleServiceImpl implements RoleService {
     }
 
     public List<Role> queryUnAssignedRoleList(Integer adminId) {
-        return null;
+        return roleMapper.queryUnAssignedRoleList(adminId);
     }
 
     public List<Role> queryAssignedRoleList(Integer adminId) {
-        return null;
+        return roleMapper.queryAssignedRoleList(adminId);
     }
 }

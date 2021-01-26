@@ -53,11 +53,19 @@ public interface AdminService {
      */
     void removeById(Integer adminId);
 
-
+    /**
+     * 更新Admin信息
+     * @param admin
+     */
     void updateAdmin(Admin admin);
 
-//    void saveAdminRoleRelationship(Integer adminId, List<Integer> roleList);
-//
+    /**
+     * 给管理员分配角色
+     * @param adminId
+     * @param roleIdList
+     */
+    void saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList);
+
 //    Admin getAdminByLoginAcct(String loginAcct);
 
 }

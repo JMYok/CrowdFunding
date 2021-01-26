@@ -8,10 +8,7 @@ import org.bobjiang.service.api.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +17,7 @@ import java.util.List;
  * @version 1.0
  * @date 2021-01-24 12:10
  */
-@Controller
+@RestController
 public class RoleHandler {
 
     @Autowired
@@ -34,7 +31,6 @@ public class RoleHandler {
      * @return
      */
     //@PreAuthorize("hasRole('部长')")
-    @ResponseBody
     @RequestMapping("/role/page/page.json")
     public ResultEntity<PageInfo<Role>> getPageInfo(
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
@@ -52,7 +48,6 @@ public class RoleHandler {
      * @param role
      * @return
      */
-    @ResponseBody
     @RequestMapping("/role/do/save.json")
     public ResultEntity<String> saveRole(Role role){
         roleService.saveRole(role);
@@ -65,7 +60,6 @@ public class RoleHandler {
      * @param role
      * @return
      */
-    @ResponseBody
     @RequestMapping("/role/do/update.json")
     public ResultEntity<String> updateRole(Role role){
         roleService.updateRole(role);
@@ -77,7 +71,6 @@ public class RoleHandler {
      * @param roleIdArrayList
      * @return
      */
-    @ResponseBody
     @RequestMapping("/role/do/remove.json")
     public ResultEntity<String> deleteRole(@RequestBody List<Integer> roleIdArrayList){
         roleService.removeById(roleIdArrayList);

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +18,9 @@ import java.util.Map;
  * @version 1.0
  * @date 2021-01-25 15:40
  */
-@Controller
+//@Controller
+//@ResponseBody
+@RestController
 public class MenuHandler {
 
     @Autowired
@@ -27,7 +30,6 @@ public class MenuHandler {
      * 得到菜单树结构数据
      * @return json
      */
-    @ResponseBody
     @RequestMapping("/menu/do/get.json")
     public ResultEntity<Menu> getWholeTree(){
         // 通过service层方法得到全部Menu对象的List
@@ -66,7 +68,6 @@ public class MenuHandler {
      * @param menu
      * @return json
      */
-    @ResponseBody
     @RequestMapping("/menu/save.json")
     public ResultEntity<String> saveMenu(Menu menu){
 
@@ -80,7 +81,6 @@ public class MenuHandler {
      * @param menu
      * @return
      */
-    @ResponseBody
     @RequestMapping("/menu/edit.json")
     public ResultEntity<String> editMenu(Menu menu){
         menuService.editMenu(menu);
@@ -93,7 +93,6 @@ public class MenuHandler {
      * @param id
      * @return json
      */
-    @ResponseBody
     @RequestMapping("/menu/remove.json")
     public ResultEntity<String> removeMenu(Integer id){
         menuService.removeMenuById(id);
