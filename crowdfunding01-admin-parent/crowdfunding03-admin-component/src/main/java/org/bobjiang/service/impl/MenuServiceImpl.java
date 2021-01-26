@@ -30,7 +30,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     public void editMenu(Menu menu) {
-        // 有选择地更新，如果menu中有的值为null（如这里的pid），则不会更新该内容
+        // 有选择地更新，如果menu中有的值为null，则不会更新该内容
         menuMapper.updateByPrimaryKeySelective(menu);
     }
 

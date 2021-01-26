@@ -57,7 +57,7 @@
 
 <body>
 
-<a href="test/ssm.html">测试SSM整合环境</a>
+<a href="admin/login/page.html">登录界面</a>
 <br>
 
 <button id="btn1">Send [5,8,9] one</button>

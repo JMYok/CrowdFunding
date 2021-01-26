@@ -7,7 +7,7 @@
 <script type="text/javascript" src="crowd/my-menu.js"></script>
 <script>
     $(function () {
-        // 将原本放在页面中的js代码封装到了特定了generateTree()函数中
+        // 调用my-menu.js中函数
         generateTree();
 
         // 给“+”按钮，添加单击响应函数，打开添加节点的模态框
