@@ -207,12 +207,13 @@ function generateAuthTree(){
                     pIdKey: "categoryId"
                 },
                 key: {
-                    // 设置在前端显示的节点名是查询到的title，而不是使用默认的name
+                    // 使用 title 属性显示节点名称，不用默认的 name 作为属性名了
                     name:"title"
                 },
             },
 
             check: {
+                //开启checkBox
                 enable:true
             }
         };
@@ -226,7 +227,7 @@ function generateAuthTree(){
         // 2 设置默认展开
         zTreeObj.expandAll(true);
 
-        // 勾选后端查出的匹配的权限
+        // 勾选已匹配的权限
         ajaxReturn = $.ajax({
             url: "assign/get/checked/auth/id.json",
             type: "post",
