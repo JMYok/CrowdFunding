@@ -9,11 +9,13 @@ import org.bobjiang.service.api.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author BobJiang
@@ -77,13 +79,45 @@ public class AssignHandler {
         return "redirect:/admin/page/page.html?pageNum="+pageNum+"&keyword="+keyword;
     }
 
+    /**
+     * 得到权限树Json数据
+     * @return ResultEntity
+     */
     @ResponseBody
     @RequestMapping("/assign/get/tree.json")
     public ResultEntity<List<Auth>> getAuthTree(){
         List<Auth> authList = authService.queryAuthList();
-
         return ResultEntity.successWithData(authList);
     }
+
+
+    /**
+     * 获得被勾选的auth信息
+     * @param roleId
+     * @return ResultEntity
+     */
+    @ResponseBody
+    @RequestMapping("/assign/get/checked/auth/id.json")
+    public ResultEntity<List<Integer>> getAuthByRoleId(Integer roleId){
+        List<Integer> authIdList = authService.getAuthByRoleId(roleId);
+        
+        return ResultEntity.successWithData(authIdList);
+    }
+
+    /**
+     * 给角色分配权限
+     * @param map
+     * @return ResultEntity
+     */
+    @ResponseBody
+    @RequestMapping("/assign/do/save/role/auth/relationship.json")
+    public ResultEntity<String> saveRoleAuthRelationship(
+            @RequestBody Map<String,List<Integer>> map ) {
+
+        authService.saveRoleAuthRelationship(map);
+        return ResultEntity.successWithoutData();
+    }
+
 
 
 }

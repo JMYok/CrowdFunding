@@ -1,6 +1,8 @@
 package org.bobjiang.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.bobjiang.entity.Auth;
 import org.bobjiang.entity.AuthExample;
@@ -27,4 +29,23 @@ public interface AuthMapper {
     int updateByPrimaryKeySelective(Auth record);
 
     int updateByPrimaryKey(Auth record);
+
+    /**
+     * 根据Roleid查找对应的权限
+     * @param roleId
+     * @return List<Integer>
+     */
+    List<Integer> selectAuthByRoleId(Integer roleId);
+
+    /**
+     * 创建新的角色权限关系
+     * @param
+     */
+    void insertNewRelationship(@Param("roleId")Integer roleId,@Param("authIdList")List<Integer> authIdList);
+
+    /**
+     * 删除旧的权限角色关系
+     * @param roleId
+     */
+    void deleteOldRelationshipByRoleId(Integer roleId);
 }

@@ -251,7 +251,6 @@ function generateAuthTree(){
 
         if (resultEntity.result == "SUCCESS"){
             var authIdArray = resultEntity.data;
-
             // 遍历得到的autoId的数组
             // 根据authIdArray勾选对应的节点
             for (var i = 0; i < authIdArray.length; i++){

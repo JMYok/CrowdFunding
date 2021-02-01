@@ -26,11 +26,23 @@ public class AuthServiceImpl implements AuthService {
     }
 
     public List<Integer> getAuthByRoleId(Integer roleId) {
-        return null;
+        return authMapper.selectAuthByRoleId(roleId);
     }
 
     public void saveRoleAuthRelationship(Map<String, List<Integer>> map) {
+        // 从map获取到roleId、authIdList
+        List<Integer> roleIdList = map.get("roleId");
+        Integer roleId = roleIdList.get(0);
 
+        List<Integer> authIdList = map.get("authIdList");
+
+        // 1 清除原有的关系信息
+        authMapper.deleteOldRelationshipByRoleId(roleId);
+
+        // 2 当authIdList有效时，添加前端获取的新的关系信息
+        if (authIdList != null && authIdList.size() > 0){
+            authMapper.insertNewRelationship(roleId,authIdList);
+        }
     }
 
     public List<String> getAuthNameByAdminId(Integer adminId) {

@@ -88,6 +88,18 @@
     from t_auth
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!--根据Roleid查找对应的权限-->
+  <select id="selectAuthByRoleId"  resultType="int">
+    select auth_id from inner_role_auth where role_id=#{roleId}
+  </select>
+
+  <!--删除旧的权限角色关系-->
+  <delete id="deleteOldRelationshipByRoleId">
+     delete from inner_role_auth where
+      role_id = #{roleId}
+  </delete>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_auth
     where id = #{id,jdbcType=INTEGER}
@@ -98,6 +110,15 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+
+  <!--向inner_role_auth表中插入新的关系-->
+  <insert id="insertNewRelationship">
+    insert into inner_role_auth(role_id, auth_id) values
+    <foreach collection="authIdList" item="authId" separator=",">
+      (#{roleId},#{authId})
+    </foreach>
+  </insert>
+
   <insert id="insert" parameterType="org.bobjiang.entity.Auth" >
     insert into t_auth (id, name, title, 
       category_id)
