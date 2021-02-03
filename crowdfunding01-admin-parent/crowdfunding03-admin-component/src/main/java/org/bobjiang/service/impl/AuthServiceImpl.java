@@ -46,6 +46,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     public List<String> getAuthNameByAdminId(Integer adminId) {
+
         return null;
     }
 }
