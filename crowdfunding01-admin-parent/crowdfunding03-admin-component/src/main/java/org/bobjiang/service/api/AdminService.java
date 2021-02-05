@@ -66,6 +66,11 @@ public interface AdminService {
      */
     void saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList);
 
-//    Admin getAdminByLoginAcct(String loginAcct);
+    /**
+     * 根据用户名得到Admin对象
+     * @param loginAcct
+     * @return
+     */
+    Admin getAdminByLoginAcct(String loginAcct);
 
 }

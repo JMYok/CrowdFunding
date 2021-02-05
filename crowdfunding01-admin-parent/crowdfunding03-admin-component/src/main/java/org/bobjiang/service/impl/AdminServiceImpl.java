@@ -150,4 +150,13 @@ public class AdminServiceImpl implements AdminService {
         }
         // roleIdList为空，则清空后不做操作
     }
+
+    public Admin getAdminByLoginAcct(String loginAcct) {
+        AdminExample example = new AdminExample();
+        AdminExample.Criteria criteria = example.createCriteria();
+        criteria.andLoginAcctEqualTo(loginAcct);
+        List<Admin> admins = adminMapper.selectByExample(example);
+        Admin admin = admins.get(0);
+        return admin;
+    }
 }

@@ -1,11 +1,13 @@
 package org.bobjiang.mvc.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 import javax.servlet.ServletException;
@@ -23,11 +25,17 @@ import java.io.IOException;
 @EnableWebSecurity //启用web环境下权限控制功能
 public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    UserDetailsService userDetailsService;
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder builder) throws Exception {
         // 临时使用内存版登录的模式测试代码
-        builder.inMemoryAuthentication().withUser("Tom").password("123456").roles("经理");
+        //builder.inMemoryAuthentication().withUser("Tom").password("111").roles("经理");
+
+        //基于数据认证
+        builder.userDetailsService(userDetailsService);
     }
 
     @Override

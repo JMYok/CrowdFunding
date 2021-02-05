@@ -48,4 +48,11 @@ public interface AuthMapper {
      * @param roleId
      */
     void deleteOldRelationshipByRoleId(Integer roleId);
+
+    /**
+     * 根据adminId找到权限名称
+     * @param adminId
+     * @return
+     */
+    List<String> selectAssignedAuthNameByAdminId(Integer adminId);
 }
