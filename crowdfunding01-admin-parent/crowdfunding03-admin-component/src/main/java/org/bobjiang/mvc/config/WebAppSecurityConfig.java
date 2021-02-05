@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 import javax.servlet.ServletException;
@@ -28,6 +29,9 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder builder) throws Exception {
@@ -35,12 +39,12 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
         //builder.inMemoryAuthentication().withUser("Tom").password("111").roles("经理");
 
         //基于数据认证
-        builder.userDetailsService(userDetailsService);
+        builder.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
     @Override
     protected void configure(HttpSecurity security) throws Exception {
-        String[] permitUrls = {"/index.jsp","/bootstrap/**",
+        String[] permitUrls = {"/index.jsp","/bootstrap/**","/admin/page/save.html",
                 "/crowd/**","/css/**","/fonts/**","/img/**",
                 "/jquery/**","/layer/**","/script/**","/ztree/**","/admin/login/page.html"};
         security

@@ -32,14 +32,14 @@
         <p>${requestScope.exception.message}</p>
         <p>${SPRING_SECURITY_LAST_EXCEPTION.message}</p>
         <div class="form-group has-success has-feedback">
-            <input type="text" name="login-user" value="Tom" class="form-control"  placeholder="请输入登录账号" autofocus>
+            <input type="text" name="login-user" value="Bob" class="form-control"  placeholder="请输入登录账号" autofocus>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-success has-feedback">
             <input type="text" name="login-pwd" value="123456" class="form-control" placeholder="请输入登录密码" style="margin-top:10px;">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
-        <div class="checkbox" style="text-align:right;"><a href="reg.html">我要注册</a></div>
+        <%--<div class="checkbox" style="text-align:right;"><a href="./admin/page/save.html">我要注册</a></div>--%>
         <button type="submit" class="btn btn-lg btn-success btn-block">登录</button>
     </form>
 </div>
