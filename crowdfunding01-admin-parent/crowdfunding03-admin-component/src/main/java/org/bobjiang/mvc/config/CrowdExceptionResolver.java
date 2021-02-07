@@ -19,10 +19,27 @@ import java.io.IOException;
  * @author BobJiang
  * @version 1.0
  * @date 2021-01-22 16:01
- * 基于注解的异常处理类（实测，注解版异常处理比xml版本优先生效）
+ * 基于注解的异常处理类（注解版异常处理比xml版本优先生效）
  */
 @ControllerAdvice
 public class CrowdExceptionResolver {
+
+    /**
+     * 处理其他异常
+     * @param exception
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @ExceptionHandler(value = {Exception.class})
+    public ModelAndView resolveException(Exception exception,
+                                         HttpServletRequest request, HttpServletResponse response
+    ) throws IOException {
+        String viewName = "system-error";
+        return commonCode(exception,request,response,"system-error");
+    }
+
     /**
      * 处理登录异常
      * @param exception

@@ -30,7 +30,7 @@ public class RoleHandler {
      * @param keyword
      * @return
      */
-    //@PreAuthorize("hasRole('部长')")
+    @PreAuthorize("hasRole('部长')")
     @RequestMapping("/role/page/page.json")
     public ResultEntity<PageInfo<Role>> getPageInfo(
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,

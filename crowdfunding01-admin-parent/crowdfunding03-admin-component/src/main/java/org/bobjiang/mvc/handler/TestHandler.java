@@ -3,6 +3,8 @@ package org.bobjiang.mvc.handler;
 import com.bobjiang.crowd.util.CrowdUtil;
 import org.bobjiang.entity.Admin;
 import org.bobjiang.service.api.AdminService;
+import org.bobjiang.service.api.RoleService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class TestHandler {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private RoleService roleService;
+
     Logger log = LoggerFactory.getLogger(TestHandler.class);
 
 
@@ -42,8 +47,6 @@ public class TestHandler {
         List<Admin> adminList = adminService.getAll();
 
         modelMap.addAttribute("adminList",adminList);
-
-        System.out.println(10/0);
         
         return "target";
     }

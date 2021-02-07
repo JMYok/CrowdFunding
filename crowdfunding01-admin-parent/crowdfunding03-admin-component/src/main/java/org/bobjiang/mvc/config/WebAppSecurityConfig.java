@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -24,6 +25,7 @@ import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity //启用web环境下权限控制功能
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -53,7 +55,7 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()                // 允许上面的所有请求，不需要认证
 
                 .antMatchers("/admin/page/page.html")               // 设置要得到admin的分页信息
-                .access("hasRole('经理') or hasAuthority('user:get')")  // 必须具有经理的角色
+                .access("hasRole('经理') OR hasAuthority('user:get')")
 
                 .anyRequest()               // 其他未设置的全部请求
                 .authenticated()            // 表示需要认证

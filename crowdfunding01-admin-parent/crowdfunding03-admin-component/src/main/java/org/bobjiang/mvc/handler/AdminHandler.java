@@ -90,7 +90,7 @@ public class AdminHandler {
      * @param admin
      * @return
      */
-    //@PreAuthorize("hasAuthority('user:save')")
+    @PreAuthorize("hasAuthority('user:save')")
     @RequestMapping("/admin/page/doSave.html")
     public String addAdmin(Admin admin){
         // 调用service层存储admin对象的方法

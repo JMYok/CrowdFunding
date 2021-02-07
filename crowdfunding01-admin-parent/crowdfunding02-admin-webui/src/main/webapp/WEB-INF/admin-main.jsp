@@ -15,7 +15,7 @@
                     <div class="col-xs-6 col-sm-3 placeholder">
                         <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
                         <h4>Label</h4>
-                        <span class="text-muted">Something else</span>
+                        <span class="text-muted">Only 经理权限可见</span>
                     </div>
                 </security:authorize>
                 <security:authorize access="hasAuthority('role:delete')">

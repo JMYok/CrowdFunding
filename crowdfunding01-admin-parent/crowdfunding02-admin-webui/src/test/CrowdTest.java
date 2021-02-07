@@ -14,6 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author BobJiang
@@ -35,6 +37,11 @@ public class CrowdTest {
 
     @Autowired
     private AdminService adminService;
+
+    @Test
+    public void deleteData(){
+        for(Integer i = 3;i<=238;i++)adminMapper.deleteByPrimaryKey(i);
+    }
 
     /**
      * 生成后台用户数据
