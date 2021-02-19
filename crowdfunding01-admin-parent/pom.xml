@@ -14,6 +14,7 @@
         <module>crowdfunding04-admin-entity</module>
         <module>../crowdfunding05-common-util</module>
         <module>../crowdfunding06-common-reverse</module>
+        <module>crowdfunding07-member-parent</module>
     </modules>
 
     <properties>
