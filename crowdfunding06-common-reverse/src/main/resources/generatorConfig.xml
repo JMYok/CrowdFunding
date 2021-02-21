@@ -65,7 +65,7 @@
         <!--<table tableName="t_order_project" domainObjectName="OrderProjectPO" />-->
 
         <!--<table tableName="t_menu" domainObjectName="Menu"></table>-->
-        <table tableName="t_auth" domainObjectName="Auth"></table>
+        <table tableName="t_member" domainObjectName="MemberPO"></table>
 
     </context>
 </generatorConfiguration>

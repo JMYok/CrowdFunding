@@ -24,14 +24,17 @@
 
     <!-- 配置在父工程中要管理的依赖 -->
     <dependencyManagement>
-        <dependencies> <!-- 导入 SpringCloud 需要使用的依赖信息 -->
+        <dependencies>
+            <!-- 导入 SpringCloud 需要使用的依赖信息 -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>Greenwich.SR2</version>
                 <type>pom</type> <!-- import 依赖范围表示将 spring-cloud-dependencies 包中的依赖信息导入 -->
                 <scope>import</scope>
-            </dependency> <!-- 导入 SpringBoot 需要使用的依赖信息 -->
+            </dependency>
+
+            <!-- 导入 SpringBoot 需要使用的依赖信息 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -48,6 +51,14 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>1.0.5</version>
+            </dependency>
+
+            <!-- lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.12</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
