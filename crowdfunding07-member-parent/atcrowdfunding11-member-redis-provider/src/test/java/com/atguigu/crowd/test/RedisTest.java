@@ -1,0 +1,31 @@
+package com.atguigu.crowd.test;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.test.context.junit4.SpringRunner;
+
+/**
+ * @author BobJiang
+ * @version 1.0
+ * @date 2021-02-21 23:21
+ */
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class RedisTest {
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    @Test
+    public void testRedisSet(){
+        ValueOperations<String,String> operations = redisTemplate.opsForValue();
+
+        operations.set("bob","handsome");
+        operations.set("tong","cute");
+    }
+}

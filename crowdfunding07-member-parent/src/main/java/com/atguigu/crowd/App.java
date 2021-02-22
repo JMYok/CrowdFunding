@@ -1,4 +1,4 @@
-package com.atguigu.crowd.test;
+package com.atguigu.crowd;
 
 /**
  * Hello world!

@@ -1,4 +1,4 @@
-package com.atguigu.crowd.test;
+package com.atguigu.crowd;
 
 import static org.junit.Assert.assertTrue;
 

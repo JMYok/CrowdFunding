@@ -1,4 +1,4 @@
-package com.atguigu.crowd.test;
+package com.atguigu.crowd;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
