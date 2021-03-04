@@ -4,9 +4,19 @@ import com.bobjiang.crowd.constant.CrowdConstant;
 import com.bobjiang.crowd.exception.LoginFailedException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author BobJiang
@@ -14,6 +24,103 @@ import java.security.NoSuchAlgorithmException;
  * @date 2021-01-22 15:39
  */
 public class CrowdUtil {
+
+    /**
+     * 请求第三方短信接口
+     * @param phoneNum 手机号
+     * @param appcode
+     * @param param 验证码
+     * @param sign 签名编号
+     * @param skin 模板编号
+     * @return
+     * 成功：返回验证码
+     * 失败：返回错误消息
+     */
+    public static ResultEntity<String> sendShortMessage(
+            String host,
+            String path,
+            String phoneNum,
+            String appcode,
+            String param,
+            String sign,
+            String skin){
+        host = "https://largesms.market.alicloudapi.com";  // 【1】请求地址 支持http 和 https 及 WEBSOCKET
+        path = "/largesms";  // 【2】后缀
+        appcode = "927359fdc6ad457182fc0a73ca521d42"; // 【3】开通服务后 买家中心-查看AppCode
+        
+        //生成验证码
+        StringBuilder sb =  new StringBuilder();
+        for(int i=0;i<4;i++) {
+            int code = (int) Math.random() * 10;
+            sb.append(code);
+        }
+
+        param = sb.toString();  // 【4】请求参数，详见文档描述
+        phoneNum = "13880060144";  //  【4】请求参数，详见文档描述
+        sign = "175622";   //  【4】请求参数，详见文档描述
+        skin = "1";  //  【4】请求参数，详见文档描述
+        String urlSend = host + path + "?param=" + param +"&phone="+phoneNum +"&sign="+sign +"&skin="+skin;   // 【5】拼接请求链接
+        try {
+            URL url = new URL(urlSend);
+            HttpURLConnection httpURLCon = (HttpURLConnection) url.openConnection();
+            httpURLCon.setRequestProperty("Authorization", "APPCODE " + appcode);// 格式Authorization:APPCODE (中间是英文空格)
+            int httpCode = httpURLCon.getResponseCode();
+            if (httpCode == 200) {
+                String json = read(httpURLCon.getInputStream());
+                System.out.println("正常请求计费(其他均不计费)");
+                System.out.println("获取返回的json");
+                System.out.print(json);
+
+                //请求成功，将生成验证码返回
+                return ResultEntity.successWithData("正常请求计费(其他均不计费)\n获取返回的json\n"+json,param);
+            } else {
+                Map<String, List<String>> map = httpURLCon.getHeaderFields();
+                String error = map.get("X-Ca-Error-Message").get(0);
+                if (httpCode == 400 && error.equals("Invalid AppCode `not exists`")) {
+                    System.out.println("AppCode错误 ");
+                } else if (httpCode == 400 && error.equals("Invalid Url")) {
+                    System.out.println("请求的 Method、Path 或者环境错误");
+                } else if (httpCode == 400 && error.equals("Invalid Param Location")) {
+                    System.out.println("参数错误");
+                } else if (httpCode == 403 && error.equals("Unauthorized")) {
+                    System.out.println("服务未被授权（或URL和Path不正确）");
+                } else if (httpCode == 403 && error.equals("Quota Exhausted")) {
+                    System.out.println("套餐包次数用完 ");
+                } else {
+                    System.out.println("参数名错误 或 其他错误");
+                    System.out.println(error);
+                }
+            }
+
+        } catch (MalformedURLException e) {
+            System.out.println("URL格式错误");
+        } catch (UnknownHostException e) {
+            System.out.println("URL地址错误");
+        } catch (Exception e) {
+            //打开注释查看详细报错异常信息
+             e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * 读取短信接口返回结果
+     * @param is
+     * @return
+     * @throws IOException
+     */
+    private static String read(InputStream is) throws IOException {
+        StringBuffer sb = new StringBuffer();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            line = new String(line.getBytes(), "utf-8");
+            sb.append(line);
+        }
+        br.close();
+        return sb.toString();
+    }
 
     /**
      * 判断请求类型

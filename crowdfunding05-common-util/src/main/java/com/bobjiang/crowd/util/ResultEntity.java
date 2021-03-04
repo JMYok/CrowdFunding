@@ -29,9 +29,15 @@ public class ResultEntity<T> {
         return new ResultEntity<Type>(null,data,SUCCESS);
     }
 
+    public static <Type> ResultEntity<Type> successWithData(String message,Type data){
+        return new ResultEntity<Type>(message,data,SUCCESS);
+    }
+
     public static <Type> ResultEntity<Type> failed(String message){
         return new ResultEntity<Type>(message,null,FAILED);
     }
+
+
 
 
     public ResultEntity(String message, T data, String result) {
