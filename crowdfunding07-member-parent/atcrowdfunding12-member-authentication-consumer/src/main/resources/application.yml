@@ -14,3 +14,12 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:1000/eureka/
+
+short:
+  message:
+    app-code: 927359fdc6ad457182fc0a73ca521d42
+    host: https://largesms.market.alicloudapi.com
+    path: /largesms
+    sign: 175622
+    skin: 1
+

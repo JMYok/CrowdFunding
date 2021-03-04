@@ -44,21 +44,15 @@ public class CrowdUtil {
             String param,
             String sign,
             String skin){
-        host = "https://largesms.market.alicloudapi.com";  // 【1】请求地址 支持http 和 https 及 WEBSOCKET
-        path = "/largesms";  // 【2】后缀
-        appcode = "927359fdc6ad457182fc0a73ca521d42"; // 【3】开通服务后 买家中心-查看AppCode
         
         //生成验证码
         StringBuilder sb =  new StringBuilder();
         for(int i=0;i<4;i++) {
-            int code = (int) Math.random() * 10;
+            int code = (int) (Math.random() * 10);
             sb.append(code);
         }
+        param = sb.toString();
 
-        param = sb.toString();  // 【4】请求参数，详见文档描述
-        phoneNum = "13880060144";  //  【4】请求参数，详见文档描述
-        sign = "175622";   //  【4】请求参数，详见文档描述
-        skin = "1";  //  【4】请求参数，详见文档描述
         String urlSend = host + path + "?param=" + param +"&phone="+phoneNum +"&sign="+sign +"&skin="+skin;   // 【5】拼接请求链接
         try {
             URL url = new URL(urlSend);
