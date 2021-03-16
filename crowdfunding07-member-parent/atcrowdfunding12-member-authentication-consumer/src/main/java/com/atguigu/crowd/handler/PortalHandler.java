@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PortalHandler {
 
-    // 首页
+    /**
+     * 跳转首页
+     * @return
+     */
     @RequestMapping("/")
     public String showPortalPage(){
 //        // 调用MySQLRemoteService提供的方法查询首页要显示的数据

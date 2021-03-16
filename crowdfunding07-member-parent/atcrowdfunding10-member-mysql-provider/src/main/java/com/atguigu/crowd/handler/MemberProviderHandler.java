@@ -20,8 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberProviderHandler {
 
     @Autowired
-    MemberService memberService;
+    private MemberService memberService;
 
+    /**
+     * 根据账号得到用户信息
+     * @param loginacct
+     * @return
+     */
     @RequestMapping("/get/member/by/login/acct/remote")
     public ResultEntity<MemberPO> getMemberPOByLoginAcctRemote(@RequestParam("loginacct") String loginacct){
         try {
@@ -33,10 +38,16 @@ public class MemberProviderHandler {
         }
     }
 
+
+    /**
+     * 保存用户
+     * @param memberPO
+     * @return
+     */
     @RequestMapping("/save/member/remote")
     public ResultEntity<String> saveMemberRemote(@RequestBody MemberPO memberPO){
         try {
-           // memberService.saveMember(memberPO);
+           memberService.saveMember(memberPO);
             return ResultEntity.successWithoutData();
         } catch (Exception e){
             if (e instanceof DuplicateKeyException){

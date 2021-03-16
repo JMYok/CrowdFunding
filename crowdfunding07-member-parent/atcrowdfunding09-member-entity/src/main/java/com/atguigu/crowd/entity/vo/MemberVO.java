@@ -1,15 +1,18 @@
-package com.atguigu.crowd.entity.po;
+package com.atguigu.crowd.entity.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author BobJiang
+ * @version 1.0
+ * @date 2021-03-15 21:55
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class MemberPO {
-    private Integer id;
-
+public class MemberVO {
     private String loginacct;
 
     private String userpswd;
@@ -20,13 +23,5 @@ public class MemberPO {
 
     private String phonenum;
 
-    private Integer authstatus;
-
-    private Integer usertype;
-
-    private String realname;
-
-    private String cardnum;
-
-    private Integer accttype;
+    private String code;
 }

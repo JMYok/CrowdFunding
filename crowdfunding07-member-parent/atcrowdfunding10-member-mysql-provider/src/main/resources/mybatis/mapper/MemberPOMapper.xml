@@ -133,6 +133,9 @@
       <if test="email != null" >
         email,
       </if>
+      <if test="phonenum != null" >
+        phonenum,
+      </if>
       <if test="authstatus != null" >
         authstatus,
       </if>
@@ -164,6 +167,9 @@
       </if>
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null" >
+        #{phonenum,jdbcType=VARCHAR},
       </if>
       <if test="authstatus != null" >
         #{authstatus,jdbcType=INTEGER},

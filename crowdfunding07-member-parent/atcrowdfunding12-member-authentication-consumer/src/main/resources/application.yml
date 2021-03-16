@@ -22,4 +22,6 @@ short:
     path: /largesms
     sign: 175622
     skin: 1
-
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000

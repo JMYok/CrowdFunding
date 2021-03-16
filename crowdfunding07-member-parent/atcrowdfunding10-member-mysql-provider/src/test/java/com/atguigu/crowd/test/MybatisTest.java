@@ -41,7 +41,7 @@ public class MybatisTest {
 
         String encode = passwordEncoder.encode(source);
 
-        MemberPO memberPO = new MemberPO(null, "jack", encode, "杰克", "jack@22.com", 1, 1, "真的行", "666", 1);
+        MemberPO memberPO = new MemberPO(null, "jack5", encode, "杰克", "jack@22.com", "12333333",1, 1, "真的行", "666", 1);
 
         memberPOMapper.insert(memberPO);
     }
